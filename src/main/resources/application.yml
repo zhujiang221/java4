@@ -1,0 +1,53 @@
+#修改启动端口号，端口号为4
+server:
+  port: 8082
+#配置数据库连接参数
+#这里先用一个数据库连接池，再接数据库
+spring:
+  redis:
+    cluster:
+      nodes: 192.168.159.132:7001,192.168.159.132:7002,192.168.159.132:7003,192.168.159.132:7004,192.168.159.132:7005,192.168.159.132:7006
+      max-redirects: 3
+      pool:
+        max-active: 50
+        max-idle: 20
+        min-idle: 10
+        max-wait: -1ms
+  redisson:
+    nodes: redis://192.168.159.132:7001,redis://192.168.159.132:7002,redis://192.168.159.132:7003,redis://192.168.159.132:7004,redis://192.168.159.132:7005,redis://192.168.159.132:7006
+  kafka:
+    bootstrap-servers: 192.168.159.132:9092
+    consumer:
+      bootstrap-servers: 192.168.159.132:9092
+  rabbitmq:
+    host: 192.168.159.132
+    port: 5672
+    username: admin
+    password: 123456
+    virtual-host: /
+    listener:
+      type: simple
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/myhospital?useSSL=false&characterEncoding=UTF8
+    username: root
+    password: 123456
+alipay:
+  #应用的appid
+  appid: 2021000148635127
+  #开发沙箱使用支付宝公钥
+  alipayPublic: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmbzhUjssP6qNpcaZNVp/EZ0GBFkRtW2KA9/qaVnFhU/RIkCnYQO3wDOM+xwu3mg/uuNQJtQXfGZNZuhWGu69EktkYuLLEu6oggwrl8umeLrD/BN3ItVDV0a7AyAiMouHaMWruYh3Ef6K8iSNh4hM8q5ObCUax5PYzsEqLI6gJBxd9EBF+KDDohx7m1xyRXxvZeVAPF4t9j44tzXiN7tDgPa7+3WAZwaplrpv2nSAl9aoEGfZ/Jy78bOM1wNsx8ZhLIixkcqmjbHEjze0DM6j1LQdYJ26WNNjZKQTNq5Udfjp9YgimdnB7BGwrwJ1v4ecvnKLd9RSz8XVD3tqdDDOBwIDAQAB
+  #开发沙箱使用应用私钥
+  appPrivateKey: MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDWh25PCyHkZLd1PzUm9lgSXQiKZDCv5brrloLU/f/7/FzFZnZIP7xBoWek/pmeY0Dvc4MJD9n5/3ruRa131SbnOTrZlogc4UnS3Z8pKY2JgN/JffEn5L/Y5h8Y42COk4cDStdOjEA753J0DJc83ESsRyoFa1n082toyY9mWGKrFBV59Q9b+FhW+KJsdmBGx3YlN3fK3E2JkebznBqTHpuG9IZat8ueXl+2RN4ifsJ/Mh33YiEZNkNsOjxA5kDqnhesu6HUWZErcmgVru8J+NAHKSt2vZ+RIfZ06S5JerZ3DP2Ewka8lHHppdVokGu6mjpAsYbb0iI1xgNPAqpEMmorAgMBAAECggEAPG7+dinurEZrIA5kTMuM1+95XnMG/CY9V+yYgqPjHvtirwFEROofgGWVqvdGE0Zmno3t1fmvMCv2V3Utftp/ERggKfer9GbKwypHkfLwulGhuUNPUiuwl8uL6xjytHd+y0CkEq6T0cxLg8GgQTbT6axKfChXuRdxpJ1TVkOD2ClV09RNgX/d5/fsVDcnXDNbyDS+1teNMJb2AJjnY9sziDScGH80K8e4DfqvB8h1lqrk7/EZUDv5LWG/KlGIWs0Qp2WjVRgMkhmnAVVnYm86E0tdfkHaXia8Qt9pzfkgfu0mPc3PTsxWtZiYmfQb1F2zMg4DnWARGZa5I7g14URHMQKBgQD8ibmhgk8XT3Bukatp/5JNY/xxJm2Vx3M5QDhozcPaZqA1MlrJRjYpL0tRoMjFNofUU4Xb6hgkxzobRsIy/HASJXKPH2sioMMRWIKZdlmkQ7QlviuPTottLoGt7Cp6k9I8dfSuJvMtD0fayY2ole4I5y7ooxZ/zIR2Fva7cABD/QKBgQDZeFB8xeyY3Gj/zG86dDUv6nYxYk/9Vmd37us5WGKAEuCHcV2G3XERpaMJaHQa+EoPlYWr6j1a1VNf5s0vu1qYcxePaQkkmr0wl8iuUsY9OlO0W9BevlDWoHTqJTKGmT5mDca7DDg5e8fcBj/jVZJhODbbaIVMscBrGgVr2tl7RwKBgQCk6JrbqOhU5H8a9Ozmrwmul9hFWz68TB4mCJXNenCmsdV0Z4l5XewIQOYCS+hPQCi6sj/7N4bEnYSIQ1CVUtssPl/sriub1TcMoKvH4szuw3dkHib70eKiTXhJRqsGmHj1GmHJR44MoqndaTikGiPylGTBbZ5Hnhnxs1UzWRQTUQKBgGBqd0Tae4tKLUM74BSKcQpNaRl7/PrU1ArYYnGKPiGKPQHPwSeKBhdM2HvTU6ahbjR6lkkiERG0gsKCEXaYGhJ89HUgnG0eLcLdiJvBFyMOOQ49pqRavHxrp2ooE76ZMpEMio9jW4og1vs1yh2AUuXHhorATFk0dZsGbmDjJokBAoGBAJRwbhyyYoC9KKMaJDb1I8T5Rlv/Rbj00/qVw4T4hG+UvqXKjXfilgs0Q5yD6k7caCjoAcjpXIljHSewIfJb2MwBTmlBhcnAOd4FSplf79MpftsP8V4jFKjPdDIs3mGO9as2HcWw/CqiGQUSlVstLcCN5T2c8i96gCui3Pa3aQBC
+  #设置支付成功后的跳转页面,这个无效
+  notifyUrl: http://localhost:8081/seckill
+mybatis:
+  mapper-locations: classpath:mybatis/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+

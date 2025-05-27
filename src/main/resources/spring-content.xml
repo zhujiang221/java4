@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+   <!--这里上下文就是容器，把MyUser放在xml文件中-->
+    <!--在xml中把MyUser放在这里,这里的bean默认只实例一次-->
+    <bean class="com.hospital.user.beans.MyUser" id="myuserbean" scope="singleton">
+
+
+    </bean>
+</beans>
